@@ -1,0 +1,20 @@
+.dateWrapper {
+    width: 90%;
+    text-align: left;
+    height: 3rem;
+    line-height: 3rem;
+    border-bottom: 1px solid #eee;
+    padding: 0.2rem 0.3rem;
+}
+
+input.date-hidden{
+    display: none;
+}
+
+span.date{
+    font-size: 1.4rem;
+    padding-right: 1rem;
+}
+span.week,span.labelDay{
+    color: #969696;
+}

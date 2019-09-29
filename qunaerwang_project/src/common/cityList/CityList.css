@@ -1,0 +1,202 @@
+.topWrapper{
+    width: 100%;
+    height: 3.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #00c9e2;
+}
+
+.topWrapper > i.back{
+    display: block;
+    width: 3rem;
+    line-height: 3rem;
+    font-size: 1.2rem;
+    height: 3rem;
+    color: white;
+}
+.topWrapper > div.searchWrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 2.6rem;
+    width: calc(100% - 5rem);
+    border-radius: 6px;
+    background: white;
+}
+
+.topWrapper>div.searchWrapper>input{
+    height: 2.5rem;
+    border: none;
+    flex: auto;
+    outline: none;
+    box-sizing: border-box;
+    text-align: left;
+    padding-left: 0.1rem;
+}
+.topWrapper div.searchWrapper input::placeholder{
+    font-size: 1rem;
+}
+
+.topWrapper div.searchWrapper>i{
+    display: block;
+    width: 2rem;
+    height: 2.6rem;
+    line-height: 2.6rem;
+    font-size: 1.2rem;
+    padding-left: 0.3rem;
+}
+
+.topWrapper div.searchWrapper>i.delete{
+    padding-right: 0.6rem;
+    color: #ccc;
+}
+
+
+.cityListWrapper > div.dataList-hidden{
+    display: none;
+}
+.cityListWrapper>div.dataList-show{
+    display: block;
+}
+.cityListWrapper .colorWrapper{
+    background: #eee;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+.cityListWrapper .colorWrapper ul.hotCitysWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.cityListWrapper .colorWrapper ul.hotCitysWrapper::before{
+    content: attr(data-alphabet);
+    display: block;
+    width: 100vw;
+    padding-left: 2.4rem;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-shadow: 0 0 4px #000;
+}
+
+.cityListWrapper .colorWrapper ul.hotCitysWrapper li.hot-city{
+    list-style: none;
+    height: 2.4rem;
+    width: 6rem;
+    line-height: 2.4rem;
+    text-align: center;
+    background: white;
+    border-radius: 4px;
+    margin: 0.6rem;
+}
+
+/* --------------------- 城市列表 -------------------- */
+div.searchList-show{
+    display: block;
+}
+div.searchList-hidden{
+    display: none;
+}
+div.cityListWrapper div.list-wrapper {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+div.cityListWrapper div.list-wrapper ul.list-wrapper-ul{
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+div.cityListWrapper div.list-wrapper ul.list-wrapper-ul::before{
+    content: attr(data-alphabet);
+    display: block;
+    text-align: left;
+    width: 100vw;
+    padding-left: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #eee;
+    text-shadow: 0 0 4px #000;
+}
+
+div.cityListWrapper div.list-wrapper>ul.list-wrapper-ul>li{
+    list-style: none;
+    width: 90vw;
+    float: right;
+    height: 2.6rem;
+    line-height: 2.6rem;
+    padding-left: 0.6rem;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+}
+
+/* 侧边字母表---------------------------------------> */
+div.cityListWrapper  ul.side-bar-wrapper{
+    position: fixed;
+    right: 0;
+    top: 4rem;
+    height: calc(100vh - 5.4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 100;
+}
+div.cityListWrapper ul.side-bar-wrapper>li{
+    color: #00c9e2;
+    padding: 0px 0.2rem;
+    text-align: center;
+    list-style: none;
+    font-size: 0.8rem;
+}
+
+/* 字母提示 ----------------------------------------> */
+div.cityListWrapper div.remain-letter {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    height: 2rem;
+    font-size: 1.3rem;
+    width: 6rem;
+    background: rgba(0,0,0,0.4);
+    border-radius: 1rem;
+    color: white;
+    line-height: 2rem;
+    text-align: center;
+}
+div.cityListWrapper div.remain-letter-hidden{
+    display: none;
+}
+
+/* 搜索城市组件的搜索结果列表 ----------------> */
+ul.searchListWrapper{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    top: 3.3rem;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 200;
+}
+ul.searchListWrapper li.search-item{
+    list-style: none;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    width: 100vw;
+    padding-left: 2rem;
+    border-bottom: 1px solid #eee;
+}
+

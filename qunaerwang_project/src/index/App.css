@@ -1,0 +1,65 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page .city-selector {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+    z-index: 100;
+    overflow-x: hidden;
+}
+
+.page .cityListhidden {
+    display: none;
+}
+
+.page div.train-logo {
+    width: 100%;
+    height: 8rem;
+    position: absolute;
+    top: 3rem;
+    background: url(../index/img/top_title.png);
+    background-size: 100% auto;
+    z-index: 0;
+}
+
+.header-pos {
+    width: 100vw;
+    height: 3rem;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    z-index: 1;
+}
+
+.form-wrapper{
+    background: white;
+    margin-top: 6rem;
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px #9999;
+    padding: 0px 0.4rem 1.3rem 0;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+/* 日历组件 ========================================== */
+.train-calendar-wrapper{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    overflow-x: hidden;
+    z-index: 200;
+}
+

@@ -1,0 +1,31 @@
+.header-wrapper{
+    width: 100vw;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(90deg, #00c9e2 3%, #00e4f5 92%);
+}
+
+.icon-back{
+    float: left;
+    display: block;
+    height: 3rem;
+    font-weight: 500;
+    line-height: 3.3rem;
+    font-size: 1.2rem;
+    padding-left: 1rem;
+}
+
+.icon-back > i.iconfont{
+    color: white;
+}
+
+h1.title{
+    line-height: 2rem;
+    width: calc(100vw - 24px);
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+}

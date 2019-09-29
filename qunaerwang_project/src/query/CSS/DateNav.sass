@@ -1,0 +1,18 @@
+$themeColor: #3cc;
+$priceColor: #f90;
+
+@mixin flex-row-style
+    display: flex
+    flex-direction: row
+    align-items: center
+
+div.navWrapper
+    width: 100vw
+    @include flex-row-style
+    background-color: #f8f8f8
+    justify-content: space-between
+    height: 3.2rem
+    color: $themeColor
+    span.beforeDay
+        opacity: .3
+

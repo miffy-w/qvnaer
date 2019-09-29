@@ -1,0 +1,72 @@
+.calendarWrapper{
+    background-color: white;
+    
+    ul.weekNavWrapper{
+        position: fixed;
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 1rem;
+        display: flex;
+        padding: 0.5rem 0;
+        flex-direction: row;
+        list-style: none;
+        z-index: 200;
+        li{
+            line-height: 1rem;
+            flex: 1;
+            text-align: center;
+            font-size: 0.8rem;
+            &:nth-of-type(1),
+            &:nth-last-of-type(1) {
+                color: #00afc7;
+            }
+        }
+    }
+    table.dateTable{
+        position: absolute;
+        top: 5rem;
+        width: 100vw;
+        text-align: center;
+        margin-bottom: 3rem;
+        background: white;
+        &,*{
+            padding: 0;
+        }
+        thead{
+            tr{
+                th{
+                    width: 100vw;
+                    height: 2rem;
+                    background-color: #f7f7f7;
+                }
+            }
+        }
+        tbody{
+            width: 100vw;
+            tr > td{
+                padding: 1rem;
+                &.nowDate-td{
+                    background-color: #00afc7;
+                    border-radius: 4px;
+                    color: white;
+                    padding: 0.5rem;
+                    &::after{
+                        content: "今天";
+                        display: block;
+                        color: white;
+                        margin-top: 0.2rem;
+                        font-size: 1rem;
+                    }
+                }
+                &.weekedDate-td{
+                    color: #ff8300;
+                }
+                &.pastDate-td{
+                    color: #ccc;
+                }
+            }
+        }
+    }
+}

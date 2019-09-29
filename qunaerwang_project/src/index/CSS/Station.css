@@ -1,0 +1,31 @@
+.station-wrapper{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 1.6rem 0.6rem;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+input.from-ipt,input.to-ipt{
+    display: block;
+    width: 30%;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+}
+input.from-ipt{
+    text-align: left;
+}
+input.to-ipt{
+    text-align: right;
+}
+
+i.iconfont{
+    width: 40%;
+    display: block;
+    font-size: 1.5rem;
+    color: #969696;
+    text-align: center;
+}
+

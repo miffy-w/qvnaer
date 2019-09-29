@@ -1,0 +1,38 @@
+.list-wrapper {
+    margin-top: 1.6rem;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.list-wrapper > div{
+    width: 3.6rem;
+    height: 3.6rem;
+    text-align: center;
+}
+
+.list-wrapper > div > i.iconfont{
+    display: block;
+    height: 3.6rem;
+    width: 3.6rem;
+    border: 1px solid #eee;
+    text-align: center;
+    line-height: 3.6rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.list-wrapper>div>i.grabbing{
+    color: gold;
+}
+.list-wrapper>div>i.abroad{
+    color: skyblue;
+}
+.list-wrapper>div>i.order{
+    color: cadetblue;
+}
+
+.list-wrapper>div>span{
+    font-size: 0.8rem;
+}
