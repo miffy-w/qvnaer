@@ -5,7 +5,7 @@ import './CityList.css';
 import { actions } from '../../index/store/actions';
 
 // 这里引入工具函数，为了在输入框输入内容时防抖
-import { debounce } from '../commonFunc';
+import { debounce } from '../tools/timeTools';
 
 // 顶部搜索部分 ***************************************************************************>
 function CitySearch(props){
@@ -204,8 +204,16 @@ function CityList(props) {
     const selectorCity = useCallback((name) => {
         if(fromOrTo){
             dispatch(actions.exchangeCity(to,name));
+            sessionStorage.setItem("city-party",JSON.stringify({
+                from: name,
+                to: to,
+            }));
         }else{
             dispatch(actions.exchangeCity(name,from));
+            sessionStorage.setItem("city-party", JSON.stringify({
+                from: from,
+                to: name,
+            }));
         }
         // 选好后 清空搜索空中的值：
         if(searchVal){

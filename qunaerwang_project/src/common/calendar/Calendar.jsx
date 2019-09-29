@@ -5,7 +5,7 @@ import { actions } from '../../index/store/actions';
 import './Calendar.scss';
 import Header from '../Header.jsx';
 import { FromDateCtx } from '../../index/App.jsx';
-import { getTodayFirstTime } from '../commonFunc';
+import { getTodayFirstTime } from '../tools/timeTools';
 
 function WeekBar(props){
     // 顶部的星期导航

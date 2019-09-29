@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions } from './store/actions';
 import './App.css';
-import { getTodayFirstTime } from '../common/commonFunc';
+import { getTodayFirstTime } from '../common/tools/timeTools';
 
 import Header from '../common/Header.jsx';
 import CityListPage from '../common/cityList/CityList.jsx';
@@ -38,6 +38,15 @@ function App(props){
         time: initNowDate.getTime()
     });
 
+    useEffect(() => {
+        let fd = sessionStorage.getItem("from-date");
+        if(!fd){
+            sessionStorage.setItem("from-date",JSON.stringify(fromDate));
+        }else{
+            setFromDate(JSON.parse(fd));
+        }
+    },[fromDate]);
+
     // 显示城市选择页：
     const gotoCalendar = useCallback((bool) => {
         dispatch(actions.gotoCalendar(bool));
@@ -67,14 +76,17 @@ function App(props){
         d.setMonth(obj.month - 1);
         d.setDate(obj.date);
         d = getTodayFirstTime(d).nowDateObj;
-        setFromDate({
+
+        let timeData = {
             year: d.getFullYear(),
             month: d.getMonth() + 1,
             date: d.getDate(),
             day: d.getDay(),
             time: d.getTime()
-        });
+        }
+        setFromDate(timeData);
         dispatch(actions.gotoCalendar(false));
+        sessionStorage.setItem("from-date",JSON.stringify(timeData));
     }, [dispatch]);
 
     // 路由回退

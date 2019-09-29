@@ -1,7 +1,7 @@
 import React,{ useCallback } from 'react';
 import '../CSS/StartOffDate.css';
 import PropTypes from 'prop-types';
-import { getTodayFirstTime } from '../../common/commonFunc';
+import { getTodayFirstTime } from '../../common/tools/timeTools';
 
 export default function StartOffDate(props) {
     const { gotoCalendar, fromDate } = props;

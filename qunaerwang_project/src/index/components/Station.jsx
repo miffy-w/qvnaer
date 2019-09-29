@@ -1,4 +1,4 @@
-import React,{ useCallback } from 'react';
+import React,{ useCallback,useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../CSS/Station.css';
@@ -7,8 +7,25 @@ import { actions } from '../store/actions';
 function Station(props) {
     const { dispatch, fromCity, toCity, gotoCitySelector } = props;
 
+    useEffect(() => {
+        var cityParty = sessionStorage.getItem("city-party");
+        if(!cityParty){
+            sessionStorage.setItem("city-party",JSON.stringify({
+                from: fromCity,
+                to: toCity,
+            }));
+        }else{
+            var data = JSON.parse(cityParty);
+            dispatch(actions.exchangeCity(data.to,data.from));
+        }
+    },[fromCity,toCity,dispatch]);
+
     const exchangeCity = useCallback(function (from,to){
         dispatch(actions.exchangeCity(from, to));
+        sessionStorage.setItem("city-party",JSON.stringify({
+            "from": to,
+            "to": from
+        }));
     },[dispatch]);
 
     return (
