@@ -1,3 +1,4 @@
+@charset "UTF-8";
 div.navWrapper {
   width: 100vw;
   display: flex;
@@ -5,15 +6,20 @@ div.navWrapper {
   align-items: center;
   background-color: #f8f8f8;
   justify-content: space-between;
-  height: 3.2rem;
+  height: 2.4rem;
   color: #3cc;
+  font-family: "宋体";
 }
 
 div.navWrapper span.beforeDay {
-  opacity: .3;
   padding-left: 1rem;
 }
 
 div.navWrapper span.afterDay {
   padding-right: 1rem;
+}
+
+div.navWrapper span.dateSelector {
+  font-size: 18px;
+  font-weight: 600;
 }

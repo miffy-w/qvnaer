@@ -20,6 +20,15 @@ function cityQueryReducer(state = {
     }
 }
 
+function trainQueryReducer(state = {
+    trainsData: [],
+},action){
+    switch(action.type){
+        default: return state
+    }
+}
+
 export default combineReducers({
-    cityQueryReducer
+    cityQueryReducer,
+    trainQueryReducer,
 });

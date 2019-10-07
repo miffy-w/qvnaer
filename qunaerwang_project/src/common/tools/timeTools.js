@@ -40,6 +40,21 @@ export function parseDate(){
 }
 
 /**
+ * 将形如 “2019/10/1” 或者 “2019-10-1” 的日期格式转成形如 “10月1日” 的格式
+ * @param {string} str 
+ */
+export function parseLocalDate(str){
+    var date;
+    if(str){
+        var s = str.replace(/\-/g,"/");      // eslint-disable-line no-useless-escape
+            date = new Date(s);
+    }else{
+        date = new Date();
+    }
+    return date.getMonth() + 1 + "月" + date.getDate() + "日";
+}
+
+/**
  * 输入“ 2019-10-1”（ 或者“ 2019/10/1”） 的日期格式， 返回这一天周几
  * @param {string} dateStr 
  */

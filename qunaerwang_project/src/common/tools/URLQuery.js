@@ -17,3 +17,15 @@ export function URLQuery(url){
 
     return object;
 }
+
+/**
+ * 序列化一个对象
+ * @param {Object} object 
+ */
+export function serialize(object){
+    let result = "";
+    for(let p in object){
+        result = result + p + "=" + object[p] + "&";
+    }
+    return result.replace(/&$/,"");
+}

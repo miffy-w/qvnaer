@@ -1,0 +1,29 @@
+@charset "UTF-8";
+.footer-screen-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer-screen-wrapper .icon-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-screen-wrapper .icon-nav-wrapper i.iconfont {
+  font-size: 1.4rem;
+  color: #888888;
+}
+
+.footer-screen-wrapper .icon-nav-wrapper span.icon-describe {
+  font-size: .8rem;
+  padding: .4rem 0 0 0;
+  font-family: "宋体";
+  color: #888888;
+}
