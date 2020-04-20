@@ -1,0 +1,77 @@
+$departurePlacebeBeforeBorderColor: #3cc;
+$trainListWrapperBorderBtmColor: #ececec;
+$priceColor: #f90;
+$secondFloorTrColor: #666666;
+
+.train-info-wrapper{
+    max-width: 100vw;
+    overflow: hidden;
+    padding-bottom: 5rem;
+
+    .aLink{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    table{
+        text-align: center;
+        border-bottom: 1px solid $trainListWrapperBorderBtmColor;
+        padding: .6rem;
+        width: 100%;
+
+        tr{
+            text-align: left;
+            &:nth-of-type(2) td{
+                font-size: .85rem;
+                color: $secondFloorTrColor;
+            }
+            td{
+                width: 25%;
+                &:nth-of-type(1){
+                    width: 20%;
+                }
+                &:nth-of-type(2){
+                    width: 30%;
+                }
+                &:nth-of-type(3){
+                    width: 20%;
+                }
+                &.ticketPrice{
+                    color: $priceColor;
+                }
+                &.dayAfter{
+                    i.dayAfter{
+                        color: red;
+                        padding-left: .2rem;
+                        font-size: .8rem;
+                        font-style: normal;
+                    }
+                }
+                padding-bottom: .4rem;
+
+                &.mark{
+                    span{
+                        display: inline-block;
+                        margin-right: .4rem;
+                        font-size: .8rem;
+                        text-align: center;
+                        width: .8rem;
+                        height: .8rem;
+                        padding: .1rem;
+                        font-style: inherit;
+                        line-height: 1rem;
+
+                        &.display{
+                            border: 1px solid $departurePlacebeBeforeBorderColor;
+                            color: $departurePlacebeBeforeBorderColor;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+            & > td:nth-last-of-type(1){
+                text-align: right;
+            }
+        }
+    }
+}

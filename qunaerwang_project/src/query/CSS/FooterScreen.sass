@@ -1,3 +1,4 @@
+$selectedColor: #3cc
 
 .footer-screen-wrapper
     position: fixed
@@ -8,6 +9,9 @@
     flex-direction: row
     justify-content: space-around
     align-items: center
+    background-color: #f8f8f8
+    padding: .4rem 0
+    z-index: 1000
     .icon-nav-wrapper
         display: flex
         flex-direction: column
@@ -18,5 +22,11 @@
         span.icon-describe
             font-size: .8rem
             padding: .4rem 0 0 0
-            font-family: "宋体"
+            font-family: "宋体", serif
             color: #888888
+        &.checked
+            i, span
+                color: $selectedColor
+        &.high-speed, &.only-tickets
+            span, i
+                color: $selectedColor

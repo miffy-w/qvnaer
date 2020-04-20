@@ -30,12 +30,13 @@ app.get('/',(req,res) => {
         result = await getCityList(search);
     res.send(result);
     res.end();
-}).get('/query.json',async (req,res) => {
+}).get('/rest/query',async (req,res) => {
     // 查询车次信息
+    console.log(req.query);
     var query = req.query,
-        result = await getTrainNumber(query);
-    res.send(result);
+    result = await getTrainNumber(query);
+    res.send(String(result));
     res.end();
-})
+});
 
 app.listen(5000,() => console.log("server is runing!: http://localhost:5000"));

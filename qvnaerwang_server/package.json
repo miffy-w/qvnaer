@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "express": "^4.17.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "superagent": "^5.2.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   },
   "name": "qvnaerwang_server",
   "version": "1.0.0",

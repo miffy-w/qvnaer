@@ -1,0 +1,19 @@
+html,body{
+    background-color: #f5f5f5;
+}
+
+#ticket-header .header-wrapper h1{
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+.ticket-trainCard, .ticket-trainTypeList{
+    padding: 0px .6rem;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.ticket-trainTypeList{
+    margin-top: 1rem;
+}

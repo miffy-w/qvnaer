@@ -1,0 +1,49 @@
+$priceColor: #f90;
+$borderBtmStyle: 1px solid #eaeaea;
+
+.ticket-item-wrapper{
+    font-size: 1.1rem;
+    justify-content: space-between;
+    padding: .4rem 0px;
+    padding-bottom: 0;
+    border-bottom: $borderBtmStyle;
+    &::after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .wrapper{
+        height: 2.2rem;
+
+        .item{
+            &.ticket-item-left{
+                float: left;
+                line-height: 2.2rem;
+                .price{
+                    color: $priceColor;
+                    font-weight: 500;
+                    padding-left: 1.2rem;
+                }
+            }
+            &.ticket-item-right{
+                float: right;
+                .ticket-state{
+                    font-size: .9rem;
+                    padding-right: 1.2rem;
+                }
+                .btn{
+                    display: inline-block;
+                    border: 1.5px solid $priceColor;
+                    padding: .4rem .2rem;
+                    cursor: pointer;
+                    border-radius: 6px;
+                    width: 3rem;
+                    font-size: .9rem;
+                    text-align: center;
+                    color: $priceColor;
+                }
+            }
+        }
+    }    
+}

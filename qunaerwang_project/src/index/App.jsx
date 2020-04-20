@@ -42,10 +42,11 @@ function App(props){
         let fd = sessionStorage.getItem("from-date");
         if(!fd){
             sessionStorage.setItem("from-date",JSON.stringify(fromDate));
-        }else{
-            setFromDate(JSON.parse(fd));
         }
-    },[fromDate]);
+        else
+            setFromDate(JSON.parse(fd));
+            // eslint-disable-next-line
+    },[]);
 
     // 显示城市选择页：
     const gotoCalendar = useCallback((bool) => {

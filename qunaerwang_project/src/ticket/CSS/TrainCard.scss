@@ -1,0 +1,38 @@
+.ticket-trainCard-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 1rem 0;
+
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 33.3%;
+        &:nth-last-of-type(1){
+            text-align: right;
+        }
+        &:nth-of-type(2){
+            text-align: center;
+            .timetable{
+                line-height: 1.6rem;
+                a{
+                    font-size: .75rem;
+                    color: #1ba9ba;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        span{
+            padding: .3rem 0;
+            &:nth-last-of-type(1){
+                font-size: .8rem;
+            }
+            &.duration{ color: #666666; }
+        }
+
+        .time{
+            font-size: 1.5rem;
+            color: #333333;
+        }
+    }
+}
