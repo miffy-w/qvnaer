@@ -1,0 +1,19 @@
+#order-wrapper .reminding-wrapper, 
+#order-wrapper .agreement-wrapper{
+    background-color: transparent;
+    font-size: .75rem;
+    padding: 0 1rem;
+    color: #666666;
+    p, span{
+        line-height: 1.1rem;
+        margin: 0;
+    }
+}
+
+.agreement-wrapper{
+    margin-top: .6rem;
+    margin-bottom: 5.4rem;
+    .highlight{
+        color: #00bcd4;
+    }
+}

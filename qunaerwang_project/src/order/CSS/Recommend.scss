@@ -1,0 +1,21 @@
+.recommend-wrapper{
+    display: flex;
+    background-color: white;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+
+    .left{
+        font-size: .9rem;
+        span:nth-of-type(2){
+            color: #666666;
+            font-size: .8rem;
+        }
+    }
+    .right{
+        transform: rotate(180deg);
+        i.iconfont{
+            line-height: 2rem;
+            color: #333333;
+        }
+    }
+}

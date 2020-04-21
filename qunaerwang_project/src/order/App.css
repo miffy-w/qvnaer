@@ -1,0 +1,61 @@
+#order-wrapper{
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+.order header{
+    position: fixed;
+}
+
+.order header h1{
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#order-wrapper .order-trainInfo{
+    background-color: white;
+    padding: 0 1.6rem;
+    margin-bottom: 1rem;
+    padding-top: 3rem;
+}
+
+#order-wrapper > div, .touchPhone{
+    padding: 1rem;
+    background-color: white;
+}
+
+#order-wrapper .seatType{
+    background-color: white;
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+#order-wrapper .seatType > span:nth-last-child(1){
+    width: 60%;
+}
+#order-wrapper .seatType > span:nth-last-child(2){
+    width: 40%;
+}
+#order-wrapper .seatType > span .price{
+    color: #ff8300;
+    font-size: 1.1rem;
+    padding-left: 1rem;
+}
+
+#order-wrapper .touchPhone{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#order-wrapper .touchPhone input{
+    outline: none;
+    border: none;
+    margin-left: 2rem;
+    padding-left: 1rem;
+}
+
+#order-wrapper .tip{
+    font-size: .8rem;
+}

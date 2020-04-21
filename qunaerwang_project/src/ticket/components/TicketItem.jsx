@@ -1,19 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 
 import "../CSS/TicketItem.scss";
 import Purchase from "./Purchase";
 
 function TicketItem(props){
-    const { info: { name, price, desc } } = props;
-    let [toggleShowPurchase, setToggleShowPurchase] = useState(false);
-
-    const toggle = useCallback(() => {
-        setToggleShowPurchase(!toggleShowPurchase);
-    },[toggleShowPurchase]);
+    const { info: { name, price, desc }, idx, toggle, expendedIdx } = props;
 
     return (
         <div className="ticket-item-wrapper">
-            <div className="wrapper" onClick={toggle}>
+            <div className="wrapper" onClick={() => toggle(idx)}>
                 <div className="item ticket-item-left">
                     <span>{name}</span>
                     <span className="price">
@@ -26,14 +21,12 @@ function TicketItem(props){
                         {desc}
                     </span>
                     <span className="btn">
-                        预定
+                        { idx === expendedIdx ? "收起" : "预定" }
                     </span>
                 </div>
             </div>
-            
-            {
-                toggleShowPurchase ? <Purchase /> : ''
-            }
+
+            <Purchase idx={idx} expendedIdx={expendedIdx} />
         </div>
     );
 }

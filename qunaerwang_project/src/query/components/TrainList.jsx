@@ -17,15 +17,28 @@ function ListItem(props){
         time,
         priceMsg,
         dayAfter,
+        dCity,
+        aCity,
     } = props.info;
     
     const url = useMemo(() => new URI("ticket.html")
+        .setSearch('startCity', dCity)
         .setSearch('aStation', aStation)
+        .setSearch('endCity', aCity)
         .setSearch('dStation', dStation)
-        .setSearch('trainNumber', trainNumber)
+        .setSearch('trainNum', trainNumber)
+        .setSearch('searchType', 'stasta')
+        .setSearch('seatType', '二等座')
         .setSearch('date', date)
+        .setSearch('dptHm', dTime)
+        .setSearch('searchArr', aCity)
+        .setSearch('searchDep', dCity)
+        .setSearch('needRecommondLess', 1)
+        .setSearch('bd_source', 'qunar')
+        .setSearch('msign','undefined')
+        .setSearch('_', Date.now())
         .toString(),
-    [aStation, dStation, date, trainNumber]);
+    [aStation, dStation, date, trainNumber, dCity, aCity, dTime]);
 
     const getTicketInfos = useMemo(() => (ticketInfo, info) => {
         var result = "";

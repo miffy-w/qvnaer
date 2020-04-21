@@ -73,11 +73,18 @@ export function parseLocalDate(str){
  * 输入“ 2019-10-1”（ 或者“ 2019/10/1”） 的日期格式， 返回这一天周几
  * @param {string} dateStr 
  */
-export function getWeak(dateStr){
-    var ds = dateStr.replace(/-/g, "/"),
-        num = new Date(ds).getDay();
+export function getWeek(dateStr){
+    let date = new Date().getDay();
+    if(dateStr instanceof Date) date = dateStr.getDay();
+    if(typeof dateStr === "string"){
+        var ds = dateStr.replace(/-/g, "/");
+        date = new Date(ds).getDay();
+    }else if(typeof dateStr === "number"){
+        date = new Date(dateStr).getDay();
+    }
+        
 
-    switch(num){
+    switch(date){
         case 0:
             return "周日";
         case 1:

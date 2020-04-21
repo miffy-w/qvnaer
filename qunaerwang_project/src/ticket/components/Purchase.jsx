@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import "../CSS/Purchase.scss";
 
-function Purchase(){
+function Purchase(props){
+    const { idx, expendedIdx } = props;
+
+    const gotoOrderPage = useCallback(() => {
+        const search = window.location.search;
+        window.location.href = "/order.html" + search;
+    },[]);
+
     return (
-        <div className="purchase-wrapper">
+        <div className={ idx === expendedIdx ? "purchase-wrapper show" : "purchase-wrapper" }>
             <div className="fastPurchase">
                 <div className="icon">
                     <i className="iconfont">&#xe614;</i>
@@ -15,7 +22,7 @@ function Purchase(){
                         火车票553元+40元优惠券包,7*24小时服务
                     </span>
                 </div>
-                <div className="btn">
+                <div onClick={gotoOrderPage} className="btn">
                     买票
                 </div>
             </div>

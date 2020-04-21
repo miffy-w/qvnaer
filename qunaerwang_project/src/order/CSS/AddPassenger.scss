@@ -1,0 +1,90 @@
+$themeColor: #1ba9ba;
+$borderStyle: 1px solid #dcdfe0;
+
+.add-passenger{
+    width: 100%;
+    display: flex;
+
+    .add{
+        width: 50%;
+        text-align: center;
+        color: $themeColor;
+        padding: .3rem 0;
+        font-size: 1rem;
+        &:nth-of-type(1){
+            border-right: $borderStyle;
+        }
+    }
+}
+
+#passenger-form{
+    display: flex;
+    align-items: center;
+    .hideBtn{
+        margin-right: .8rem;
+        width: 1rem;
+        height: 1rem;
+        line-height: .9rem;
+        border-radius: 50%;
+        color: red;
+        border: 1px solid red;
+    }
+    .form-wrapper{
+        width: calc(100% - 2rem);
+        .wrapper{
+            display: flex;
+            align-items: baseline;
+            margin-bottom: .6rem;
+            border-bottom: $borderStyle;
+            .title{
+                height: 2rem;
+                line-height: 2rem;
+                min-width: 3.75rem;
+                font-size: .9rem;
+                color: $themeColor;
+                border-right: $borderStyle;
+            }
+            input{
+                height: 2rem;
+                border: none;
+                outline: none;
+                padding-left: .6rem;
+                width: calc(100% - 3.75rem);
+                &::placeholder{
+                    opacity: .6;
+                    font-size: .9rem;
+                }
+                &[name='name']{
+                    width: calc(100% - 3.75rem - 3.6rem);
+                }
+            }
+            .ticketBtn{
+                font-size: .8rem;
+                white-space: nowrap;
+                span{
+                    i.iconfont{
+                        padding-left: .4rem;
+                    }
+                }
+            }
+            span.rotate{
+                transform: rotate(-90deg);
+                display: inline-block;
+                vertical-align: sub;
+            }
+            i.rotate{
+                font-size: inherit;
+                color: #666666;
+            }
+
+            &.certificate{
+                span.rotate{
+                    vertical-align: unset;
+                    i.iconfont{
+                        font-size: .8rem;
+                    }
+                }
+            }
+        }
+    }
+}

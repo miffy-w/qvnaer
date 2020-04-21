@@ -1,0 +1,22 @@
+$iconColor: #1ba9ba;
+$fontColor: #666;
+
+.card-middle-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    span.icon{
+        text-align: center;
+        i.iconfont{
+            line-height: 1;
+            opacity: .4;
+            color: $iconColor;
+            font-size: 3rem;
+        }
+    }
+    span:not(.icon){
+        font-size: .8rem;
+        color: $fontColor;
+    }
+}

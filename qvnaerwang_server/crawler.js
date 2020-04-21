@@ -8,6 +8,7 @@ function proRequest(URL){
     return superAgent.get(URL)
         .set("User-Agent", userAgent)
         .set("accept", "json")
+        .set('Cookie', COOKIE)
         .then(res => res.text)
         .catch(err => err);
 }
@@ -63,7 +64,19 @@ async function getCityList(info){
     }
 }
 
+async function getTrainSeat(query){
+    const search = "?" + querystring.stringify(query);
+    const url = 'https://touch.train.qunar.com/api/train/trainSeat' + search;
+    try {
+        var result = await proRequest(url);
+        return result;
+    } catch (error) {
+        return -1;
+    }
+}
+
 module.exports = {
     getTrainNumber,
     getCityList,
+    getTrainSeat,
 }

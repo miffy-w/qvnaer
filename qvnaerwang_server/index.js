@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const { getTrainNumber, getCityList } = require('./crawler');
+const { getTrainNumber, getCityList, getTrainSeat } = require('./crawler');
 
 const app = express();
 
@@ -32,11 +32,15 @@ app.get('/',(req,res) => {
     res.end();
 }).get('/rest/query',async (req,res) => {
     // 查询车次信息
-    console.log(req.query);
     var query = req.query,
     result = await getTrainNumber(query);
     res.send(String(result));
     res.end();
+}).get('/api/train/trainSeat', async (req, res) => {
+    console.log(req.query);
+    const query = req.query;
+    const result = await getTrainSeat(query);
+    res.send(result);
 });
 
 app.listen(5000,() => console.log("server is runing!: http://localhost:5000"));

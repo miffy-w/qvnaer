@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from "prop-types";
 import './DateNav.sass';
 
-import { getWeak, parseLocalDate } from '../tools/timeTools';
+import { getWeek, parseLocalDate } from '../tools/timeTools';
 
 const DateNav = memo(function (props) {
     
@@ -10,7 +10,7 @@ const DateNav = memo(function (props) {
     return (
         <div className="navWrapper">
             <span onClick={prev} style={isPrevDisable ? {opacity: ".3"} : {}} className="beforeDay">前一天</span>
-            <span className="dateSelector">{parseLocalDate(date)} {getWeak(date)}</span>
+            <span className="dateSelector">{parseLocalDate(date)} {getWeek(date)}</span>
             <span onClick={next} style={isNextDisable ? {opacity: ".3"} : {}} className="afterDay">后一天</span>
         </div>
     )
