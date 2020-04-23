@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const { getTrainNumber, getCityList, getTrainSeat } = require('./crawler');
+const { getTrainNumber, getCityList, getTrainSeat, getOrderList } = require('./crawler');
 
 const app = express();
 
@@ -41,6 +41,9 @@ app.get('/',(req,res) => {
     const query = req.query;
     const result = await getTrainSeat(query);
     res.send(result);
-});
+}).get('/api/orderList', async (req, res) => {
+    const result = await getOrderList();
+    res.send(result);
+})
 
 app.listen(5000,() => console.log("server is runing!: http://localhost:5000"));

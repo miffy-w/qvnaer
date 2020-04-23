@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 const CardMiddle = (props) => {
     const { trainNumber, showDialog  } = props;
@@ -10,5 +11,10 @@ const CardMiddle = (props) => {
         </div>
     );
 }
+
+CardMiddle.propTypes = {
+    trainNumber: PropTypes.string.isRequired,
+    showDialog: PropTypes.func.isRequired,
+};
 
 export default CardMiddle;

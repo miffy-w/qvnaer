@@ -1,28 +1,38 @@
-#order-wrapper .ticketType-dialog{
-    position: fixed;
-    background-color: white;
-    width: 100vw;
-    bottom: 0;
+#order-wrapper .transparent-mask{
+    position: absolute;
+    top: 0;
     left: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: transparent;
+    box-sizing: border-box;
 
-    &>div{
-        padding: 1rem 0;
-        text-align: center;
-        border-bottom: 1px solid #dddddd;
-        &:nth-last-of-type(1){
-            border: none;
-        }
-        &.close-btn{
-            background-color: #00c9e2;
-            padding: .4rem;
-            border-radius: 10px 10px 0 0;
-            text-align: left;
-            color: white;
-            i.iconfont{
-                font-size: 1.4rem;
+    .ticketType-dialog{
+        position: fixed;
+        background-color: white;
+        width: 100vw;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    
+        &>div{
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 1px solid #dddddd;
+            &:nth-last-of-type(1){
+                border: none;
+            }
+            &.close-btn{
+                background-color: #00c9e2;
+                padding: .4rem;
+                border-radius: 10px 10px 0 0;
+                text-align: left;
+                color: white;
+                i.iconfont{
+                    font-size: 1.4rem;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from "prop-types";
 
 import "../CSS/Dialog.scss";
 
@@ -58,5 +59,10 @@ const TimetableDialog = (props) => {
         </div>
     );
 }
+
+TimetableDialog.propTypes = {
+    showDialog: PropTypes.bool.isRequired,
+    setIsShowTimetable: PropTypes.func.isRequired,
+};
 
 export default TimetableDialog;

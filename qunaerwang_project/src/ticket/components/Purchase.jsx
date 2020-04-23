@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 
 import "../CSS/Purchase.scss";
 
@@ -44,5 +45,10 @@ function Purchase(props){
         </div>
     );
 }
+
+Purchase.propTypes = {
+    idx: PropTypes.number.isRequired,
+    expendedIdx: PropTypes.number.isRequired,
+};
 
 export default Purchase;

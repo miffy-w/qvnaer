@@ -1,13 +1,15 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import "../CSS/Recommend.scss";
 
-const Recommend = () => {
+const Recommend = (props) => {
+    const { seatType } = props;
     return (
         <>
             <div className="seatType">
                 <span className="tip">坐席</span>
                 <span>
-                    <span>硬座</span>
+                    <span>{seatType}</span>
                     <span className="price">￥177.5</span>
                 </span>
             </div>
@@ -23,5 +25,9 @@ const Recommend = () => {
         </>
     );
 }
+
+Recommend.propTypes = {
+    seatType: PropTypes.string.isRequired,
+};
 
 export default Recommend;

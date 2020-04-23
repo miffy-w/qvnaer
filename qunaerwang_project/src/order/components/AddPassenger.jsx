@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import PropTypes from "prop-types";
 import "../CSS/AddPassenger.scss";
 
-function PassengerForm(){
+function PassengerForm(props){
+    const { 
+        setIsShowAddPerson,
+        toggleIsShowCertificateFrame,
+        isShowCertificateFrame,
+        setNowList,
+        cerTypeList,
+        genderList,
+        ticketTypeList,
+    } = props;
+
+    console.log('isShowCertificateFrame: ', isShowCertificateFrame);
+
+    const handleToggleTicketFrame = useCallback(() => {
+        if(!isShowCertificateFrame){
+            setNowList(ticketTypeList);
+        }
+        toggleIsShowCertificateFrame();
+    },[ticketTypeList, setNowList, toggleIsShowCertificateFrame, isShowCertificateFrame]);
+
     return (
         <form id="passenger-form">
-            <div className="hideBtn">
+            <div onClick={() => setIsShowAddPerson(false)} className="hideBtn">
                 <span>—</span>
             </div>
 
@@ -12,7 +32,7 @@ function PassengerForm(){
                 <div className="name wrapper">
                     <div className="title">性名</div>
                     <input type="text" placeholder="乘客性名" name="name"/>
-                    <span className="ticketBtn">
+                    <span className="ticketBtn" onClick={handleToggleTicketFrame}>
                         成人票
                         <span className="rotate">
                             <i className="rotate iconfont">&#xeb99;</i>
@@ -38,10 +58,25 @@ function PassengerForm(){
     );
 }
 
-const AddPassenger = () => {
+PassengerForm.propTypes = {
+    setIsShowAddPerson: PropTypes.func.isRequired,
+    setNowList: PropTypes.func.isRequired,
+    cerTypeList: PropTypes.array.isRequired,
+    genderList: PropTypes.array.isRequired,
+    ticketTypeList: PropTypes.array.isRequired,
+};
+
+const AddPassenger = (props) => {
+    const { isShowAddPerson, setIsShowAddPerson } = props;
+    const handleAddAdult = useCallback(() => {
+        if(!isShowAddPerson){
+            setIsShowAddPerson(true);
+        }
+    },[isShowAddPerson, setIsShowAddPerson]);
+
     return (
         <div className="add-passenger">
-            <div className="add">
+            <div onClick={handleAddAdult} className="add">
                 添加成人
             </div>
             <div className="add">
@@ -50,5 +85,10 @@ const AddPassenger = () => {
         </div>
     );
 }
+
+AddPassenger.propTypes = {
+    isShowAddPerson: PropTypes.bool.isRequired,
+    setIsShowAddPerson: PropTypes.func.isRequired,
+};
 
 export { AddPassenger, PassengerForm };

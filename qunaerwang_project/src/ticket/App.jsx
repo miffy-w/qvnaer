@@ -39,6 +39,8 @@ function App(props){
         dispatch,
         isShowTimetable,
         searchParsed,
+        departState,
+        arriveState,
     } = props;
 
     const goBack = useCallback(() => {
@@ -111,6 +113,8 @@ function App(props){
                 <TrainCard
                     depWeek={getWeek(departDate.time)}
                     arrWeek={getWeek(arriveDate.time)}
+                    depStation={departState}
+                    arrStation={arriveState}
                 >
                     <CardMiddle
                         showDialog={showDialog} 

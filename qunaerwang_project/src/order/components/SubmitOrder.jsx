@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
+import PropTypes from "prop-types";
 import '../CSS/SubmitOrder.scss';
 
 // 金额详情页
-function AmountDetails(){
+function AmountDetails(props){
+    const {setIsShowAmountDetailsFrame} = props;
+    const bill = useRef(null);
+
+    const hideDetailFrame = useCallback((e) => {
+        if(!bill.current.contains(e.target)){
+            setIsShowAmountDetailsFrame(false);
+        }
+    },[bill, setIsShowAmountDetailsFrame]);
+
     return (
-        <div className="mask">
-            <div className="details">
+        <div className="mask" onClick={hideDetailFrame}>
+            <div className="details" ref={bill}>
                 <p>金额详情</p>
                 <div className="left">
                     <span>火车票</span>
@@ -25,17 +35,32 @@ function AmountDetails(){
     );
 }
 
-export default function SubmitOrder() {
+AmountDetails.propTypes = {
+    setIsShowAmountDetailsFrame: PropTypes.func.isRequired,
+};
+
+export default function SubmitOrder(props) {
+    const { 
+        isShowAmountDetailsFrame, 
+        toggleIsShowAmountDetailsFrame,
+        setIsShowAmountDetailsFrame,
+    } = props;
     return (
         <>
-            {/* <AmountDetails /> */}
+            {
+                isShowAmountDetailsFrame ? <AmountDetails 
+                    setIsShowAmountDetailsFrame={setIsShowAmountDetailsFrame}
+                /> : ''
+            }
             <div className="submit-order-wrapper">
-                <div className="total-price">
+                <div className="total-price" onClick={() => toggleIsShowAmountDetailsFrame()}>
                     <span className="wrapper">
                         <span className="price">207.5
                             <br /><span className="tip">支付金额</span>
                         </span>
-                        <span className="icon">
+                        <span className={
+                            isShowAmountDetailsFrame ? "icon rotate90": "icon"
+                        }>
                             <i className="iconfont">&#xeb99;</i>
                         </span>
                     </span>
@@ -50,3 +75,8 @@ export default function SubmitOrder() {
         </>
     )
 }
+
+SubmitOrder.propTypes = {
+    isShowAmountDetailsFrame: PropTypes.bool.isRequired,
+    toggleIsShowAmountDetailsFrame: PropTypes.func.isRequired,
+};

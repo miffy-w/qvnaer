@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import "../CSS/CardMiddle.scss";
 
-const CardMiddle = () => {
+const CardMiddle = (props) => {
+    const { trainNumber } = props;
     return (
         <div className="card-middle-wrapper">
-            <span>Z281直达特快</span>
+            <span>{ trainNumber }直达特快</span>
             <span className="icon">
                 <i className="iconfont">&#xe669;</i>
             </span>
@@ -12,5 +14,9 @@ const CardMiddle = () => {
         </div>
     );
 }
+
+CardMiddle.propTypes = {
+    trainNumber: PropTypes.string.isRequired,
+};
 
 export default CardMiddle;

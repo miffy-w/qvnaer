@@ -1,14 +1,15 @@
 import React from "react";
 
 import "../CSS/TrainCard.scss";
+import Proptypes from "prop-types";
 
 export default function TrainCard(props){
-    const { depWeek, arrWeek } = props;
+    const { depWeek, arrWeek, depStation, arrStation } = props;
 
     return (
         <div className="ticket-trainCard-wrapper">
             <div className="wrapper left-wrapper">
-                <span>北京南</span>
+                <span>{depStation}</span>
                 <span className="time">19:00</span>
                 <span className="date">04-20 {depWeek}</span>
             </div>
@@ -16,10 +17,17 @@ export default function TrainCard(props){
             { props.children }
 
             <div className="wrapper right-wrapper">
-                <span>上海虹桥</span>
+                <span>{arrStation}</span>
                 <span className="time">23:18</span>
                 <span className="date">04-20 {arrWeek}</span>
             </div>
         </div>
     );
 }
+
+TrainCard.propTypes = {
+    depWeek: Proptypes.string.isRequired,
+    arrWeek: Proptypes.string.isRequired,
+    depStation: Proptypes.string.isRequired,
+    arrStation: Proptypes.string.isRequired,
+};

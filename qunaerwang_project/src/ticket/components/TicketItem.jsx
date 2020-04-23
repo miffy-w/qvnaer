@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import "../CSS/TicketItem.scss";
 import Purchase from "./Purchase";
 
@@ -30,5 +30,16 @@ function TicketItem(props){
         </div>
     );
 }
+
+TicketItem.propTypes = {
+    info: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
+        desc: PropTypes.string.isRequired
+    }),
+    idx: PropTypes.number.isRequired,
+    expendedIdx: PropTypes.number.isRequired,
+    toggle: PropTypes.func.isRequired,
+};
 
 export default TicketItem;

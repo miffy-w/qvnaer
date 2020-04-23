@@ -32,6 +32,9 @@
                 i.iconfont{
                     font-size: .8rem;
                 }
+                &.rotate90{
+                    transform: rotate(-90deg) translate(1.5rem, 1.4rem);
+                }
             }
         }
     }

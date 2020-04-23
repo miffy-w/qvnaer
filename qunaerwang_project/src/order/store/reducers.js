@@ -13,6 +13,8 @@ import {
     ACTION_SET_IS_SHOW_MEAL_FRAME,
     ACTION_SET_IS_SHOW_CERTIFICATE_FRAME,
     ACTION_SET_IS_SHOW_AMOUNT_DETAILS_FRAME,
+    ACTION_SET_SEAT_TYPE,
+    ACTION_SET_NOW_LIST,
 } from "./actions";
 
 export default {
@@ -128,4 +130,20 @@ export default {
             default: return state;
         }
     },
+    seatType(state = null, action){
+        const { type, payload } = action;
+        switch(type){
+            case ACTION_SET_SEAT_TYPE: 
+                return payload;
+            default: return state;
+        }
+    },
+    nowList(state = [], action){
+        const { type, payload } = action;
+        switch(type){
+            case ACTION_SET_NOW_LIST: 
+                return payload;
+            default: return state;
+        }
+    }
 };

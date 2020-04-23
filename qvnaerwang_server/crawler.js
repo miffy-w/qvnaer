@@ -1,4 +1,5 @@
 const querystring = require('querystring');
+const fs = require("fs");
 const superAgent = require("superagent");
 
 const userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1";
@@ -75,8 +76,20 @@ async function getTrainSeat(query){
     }
 }
 
+async function getOrderList(){
+    return new Promise((resolve, reject) => {
+        fs.readFile("./rest/order/data.json", {encoding: 'utf8'}, (err, data) => {
+            if(err){
+                reject(err);
+            }
+            resolve(data);
+        });
+    });
+}
+
 module.exports = {
     getTrainNumber,
     getCityList,
     getTrainSeat,
+    getOrderList,
 }
