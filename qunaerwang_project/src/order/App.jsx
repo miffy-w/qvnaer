@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import './App.css';
@@ -8,7 +8,7 @@ import CardMiddle from "./components/CardMiddle";
 import TrainCard from "../ticket/components/TrainCard";
 import Recommend from "./components/Recommend";
 import Safeguard from "./components/Safeguard";
-import {AddPassenger, PassengerForm} from "./components/AddPassenger";
+import AddPassenger from "./components/AddPassenger";
 import Agreement from "./components/Agreement";
 import SubmitOrder from "./components/SubmitOrder";
 import TicketType from "./components/TicketType";
@@ -27,7 +27,11 @@ import {
     setIsShowAmountDetailsFrame,
     setIsShowCertificateFrame,
     toggleIsShowCertificateFrame,
+    createAdult,
+    createChild,
     setNowList,
+    removePassenger,
+    updateMember,
 } from "./store/actions";
 
 function App(props){
@@ -47,6 +51,7 @@ function App(props){
         isShowAmountDetailsFrame,
         isShowCertificateFrame,
         nowList,
+        members,
     } = props;
 
     const goback = useCallback(() => {
@@ -74,14 +79,24 @@ function App(props){
             }).catch(err => console.error(err));
     },[]);
 
-    const pasForm = bindActionCreators({ 
-        setIsShowAddPerson, setNowList,
-        toggleIsShowCertificateFrame,
-    }, dispatch);
-    const submitOrderCbs = bindActionCreators({
+    const pasFormCbs = useMemo(() => bindActionCreators({ 
+        setIsShowAddPerson,
+        setNowList,
+        setIsShowCertificateFrame,
+        createAdult,
+        createChild,
+        removePassenger,
+        updateMember,
+    }, dispatch),[dispatch]);
+    
+    const submitOrderCbs = useMemo(() => bindActionCreators({
         toggleIsShowAmountDetailsFrame,
         setIsShowAmountDetailsFrame,
-    }, dispatch);
+    }, dispatch),[dispatch]);
+    const dialogCbs = useMemo(() => bindActionCreators({ 
+        setIsShowCertificateFrame,
+    },dispatch),[dispatch]);
+
 
     return (
         <div className="order">
@@ -100,20 +115,15 @@ function App(props){
                 </div>
 
                 <Recommend seatType={seatType} />
-                <div className="add-passenger-wrapper">
-                    {
-                        isShowAddPerson ? <PassengerForm {...pasForm} 
-                            cerTypeList={cerTypeList}
-                            genderList={genderList}
-                            ticketTypeList={ticketTypeList}
-                            isShowCertificateFrame={isShowCertificateFrame}
-                        /> : ''
-                    }
-                    <AddPassenger 
-                        isShowAddPerson={isShowAddPerson}
-                        {...pasForm}
-                    />
-                </div>
+                <AddPassenger 
+                    isShowAddPerson={isShowAddPerson}
+                    cerTypeList={cerTypeList}
+                    genderList={genderList}
+                    ticketTypeList={ticketTypeList}
+                    isShowCertificateFrame={isShowCertificateFrame}
+                    members={members}
+                    {...pasFormCbs}
+                />
 
                 <form className="touchPhone">
                     <span className="tip">联系手机</span>
@@ -126,7 +136,7 @@ function App(props){
                     {...submitOrderCbs}
                 />
                 {
-                    isShowCertificateFrame ? <TicketType list={nowList} /> : ''
+                    <TicketType isShowCertificateFrame={isShowCertificateFrame} list={nowList} {...dialogCbs} />
                 }
             </div>
         </div>

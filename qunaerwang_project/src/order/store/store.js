@@ -17,7 +17,7 @@ export default createStore(
         trainNumber: "",
         duration: null,
         ticketType: null,
-        memebers: [],
+        members: [],           // 乘客信息
         isShowAddPerson: true,      // 添加成人票的表单是否显示
         isShowMealFrame: false,     // 是否显示“高速出票套餐”
         isShowAmountDetailsFrame: false,    // 是否显示金额详情的弹出框

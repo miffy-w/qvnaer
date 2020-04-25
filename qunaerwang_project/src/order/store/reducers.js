@@ -8,7 +8,7 @@ import {
     ACTION_SET_TRAIN_NUMBER,
     ACTION_SET_DURATION,
     ACTION_SET_TICKET_TYPE,
-    ACTION_SET_MEMEBERS,
+    ACTION_SET_MEMBERS,
     ACTION_SET_IS_SHOW_ADD_PERSON,
     ACTION_SET_IS_SHOW_MEAL_FRAME,
     ACTION_SET_IS_SHOW_CERTIFICATE_FRAME,
@@ -90,10 +90,10 @@ export default {
             default: return state;
         }
     },
-    memebers(state = [], action){
+    members(state = [], action){
         const { type, payload } = action;
         switch(type){
-            case ACTION_SET_MEMEBERS:
+            case ACTION_SET_MEMBERS:
                 return payload;
             default: return state;
         }

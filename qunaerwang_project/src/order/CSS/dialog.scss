@@ -1,11 +1,25 @@
 #order-wrapper .transparent-mask{
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    height: 100vh;
+    height: 0;
     width: 100vw;
     background-color: transparent;
     box-sizing: border-box;
+    overflow: hidden;
+    transition: height 1s;
+
+    &.transition{
+        height: 100vh;
+        .ticketType-dialog{
+            display: flex;
+        }
+    }
+
+    .mask{
+        height: 100%;
+        opacity: 0;
+    }
 
     .ticketType-dialog{
         position: fixed;
@@ -14,7 +28,7 @@
         bottom: 0;
         left: 0;
         padding: 0;
-        display: flex;
+        display: none;
         flex-direction: column;
     
         &>div{

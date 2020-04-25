@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from "prop-types";
 
-const CardMiddle = (props) => {
+const CardMiddle = memo((props) => {
     const { trainNumber, showDialog  } = props;
     return (
         <div className="wrapper middle-wrapper">
@@ -10,7 +10,7 @@ const CardMiddle = (props) => {
             <span className="duration">耗时4小时18分</span>
         </div>
     );
-}
+});
 
 CardMiddle.propTypes = {
     trainNumber: PropTypes.string.isRequired,

@@ -96,6 +96,8 @@ function App(props){
         next,
     } = useNav(dispatch, departDate, prevDate, nextDate);
 
+    if(!searchParsed)   return null;
+
     return (
         <div className="ticketApp-wrapper">
             <header id="ticket-header">
@@ -130,7 +132,7 @@ function App(props){
                 }
             </section>
             {
-                isShowTimetable ? <TimetableDialog showDialog={showDialog} {...dialogCbs} /> : ""
+                isShowTimetable ? <TimetableDialog isShowTimetable={isShowTimetable} {...dialogCbs} /> : ""
             }
         </div>
     );

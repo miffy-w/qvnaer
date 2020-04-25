@@ -1,9 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import PropTypes from "prop-types";
 
 import "../CSS/Purchase.scss";
 
-function Purchase(props){
+const Purchase = memo((props) => {
     const { idx, expendedIdx } = props;
 
     const gotoOrderPage = useCallback(() => {
@@ -44,7 +44,7 @@ function Purchase(props){
             </div>
         </div>
     );
-}
+});
 
 Purchase.propTypes = {
     idx: PropTypes.number.isRequired,

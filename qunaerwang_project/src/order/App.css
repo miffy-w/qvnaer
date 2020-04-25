@@ -16,13 +16,13 @@
 #order-wrapper .order-trainInfo{
     background-color: white;
     padding: 0 1.6rem;
-    margin-bottom: 1rem;
     padding-top: 3rem;
 }
 
 #order-wrapper > div, .touchPhone{
     padding: 1rem;
     background-color: white;
+    margin-bottom: .8rem;
 }
 
 #order-wrapper .seatType{
@@ -30,7 +30,6 @@
     display: flex;
     align-items: baseline;
     width: 100%;
-    margin-bottom: 1rem;
 }
 #order-wrapper .seatType > span:nth-last-child(1){
     width: 60%;
@@ -45,8 +44,7 @@
 }
 
 #order-wrapper .touchPhone{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: .8rem;
 }
 
 #order-wrapper .touchPhone input{

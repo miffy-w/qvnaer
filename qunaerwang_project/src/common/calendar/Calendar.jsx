@@ -1,4 +1,4 @@
-import React,{ useState,useEffect,Fragment,useCallback,useContext } from 'react';
+import React,{ useState,useEffect,Fragment,useCallback,useContext, memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from '../../index/store/actions';
@@ -7,7 +7,7 @@ import Header from '../Header.jsx';
 import { FromDateCtx } from '../../index/App.jsx';
 import { getTodayFirstTime } from '../tools/timeTools';
 
-function WeekBar(props){
+const WeekBar = memo((props) => {
     // 顶部的星期导航
     const { weekArr,isGotoTop } = props;
     return (
@@ -19,7 +19,7 @@ function WeekBar(props){
             }
         </ul>
     );
-}
+});
 WeekBar.propTypes = {
     weekArr: PropTypes.array,
     isGotoTop: PropTypes.bool
@@ -236,8 +236,10 @@ function Calendar(props) {
     return (
         // 最顶部组件消失后，日历组件定位到页面最顶部
         <div className="calendarWrapper">
-            <Header title="日期选择" goback={hideCalendar} />
-            <WeekBar isGotoTop={isGotoTop} weekArr={weekArr} />
+            <div className="top-fixed"> 
+                <Header title="日期选择" goback={hideCalendar} />
+                <WeekBar isGotoTop={isGotoTop} weekArr={weekArr} />
+            </div>
             <DateList dateDataList={ dateList } />
         </div>
     )

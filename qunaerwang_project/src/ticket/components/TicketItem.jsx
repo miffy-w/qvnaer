@@ -34,7 +34,7 @@ function TicketItem(props){
 TicketItem.propTypes = {
     info: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
         desc: PropTypes.string.isRequired
     }),
     idx: PropTypes.number.isRequired,

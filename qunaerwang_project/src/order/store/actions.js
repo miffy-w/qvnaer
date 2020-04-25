@@ -7,7 +7,7 @@ export const ACTION_SET_ARR_DATE = "ACTION_SET_ARR_DATE";
 export const ACTION_SET_TRAIN_NUMBER = "ACTION_SET_TRAIN_NUMBER";
 export const ACTION_SET_DURATION = "ACTION_SET_DURATION";
 export const ACTION_SET_TICKET_TYPE = "ACTION_SET_TICKET_TYPE";
-export const ACTION_SET_MEMEBERS = "ACTION_SET_MEMEBERS";
+export const ACTION_SET_MEMBERS = "ACTION_SET_MEMBERS";
 export const ACTION_SET_IS_SHOW_ADD_PERSON = "ACTION_SET_IS_SHOW_ADD_PERSON";
 export const ACTION_SET_IS_SHOW_MEAL_FRAME = "ACTION_SET_IS_SHOW_MEAL_FRAME";
 export const ACTION_SET_IS_SHOW_CERTIFICATE_FRAME = "ACTION_SET_IS_SHOW_CERTIFICATE_FRAME";
@@ -69,10 +69,10 @@ export function setTicketType(ticketType){
         payload: ticketType,
     }
 }
-export function setMemebers(memebers){
+export function setMembers(members){
     return {
-        type: ACTION_SET_MEMEBERS,
-        payload: memebers,
+        type: ACTION_SET_MEMBERS,
+        payload: members,
     }
 }
 export function setSeatType(seatType){
@@ -123,6 +123,7 @@ export function setIsShowCertificateFrame(isShowCertificateFrame){
 export function toggleIsShowCertificateFrame(){
     return (dispatch, getState) => {
         const { isShowCertificateFrame } = getState();
+        console.log('isShowCertificateFrame: ', isShowCertificateFrame);
         dispatch(setIsShowCertificateFrame(!isShowCertificateFrame));
     }
 }
@@ -137,5 +138,90 @@ export function toggleIsShowAmountDetailsFrame(){
     return (dispatch, getState) => {
         const { isShowAmountDetailsFrame } = getState();
         dispatch(setIsShowAmountDetailsFrame(!isShowAmountDetailsFrame));
+    }
+}
+
+let passengerIdSeed = 0;
+
+export function createAdult(){
+    return (dispatch, getState) => {
+        const { members } = getState();
+        // 检查表单中的字段是不是都填写了，有一项没填写就不能再添加新的乘客
+        for(let passenger of members){
+            const keys = Object.keys(passenger);
+            for(let key of keys){
+                if(!passenger[key]){
+                    return;
+                }
+            }
+        }
+        dispatch(setMembers([
+            ...members,
+            {
+                id: ++ passengerIdSeed,
+                name: '',
+                ticketType: 'adult',
+                licenceNo: '',
+                seat: 'Z',
+            }
+        ]));
+    }
+}
+export function createChild(){
+    return (dispatch, getState) => {
+        const { members } = getState();
+        let adultFound = null;
+        for(let passenger of members){
+            const keys = Object.keys(passenger);
+            for(let key of keys){
+                if(!passenger[key]){
+                    return;
+                }
+            }
+            if(passenger.ticketType === "adult"){
+                adultFound = passenger.id;
+            }
+        }
+        if(!adultFound){
+            alert("请至少正确添加一个成人信息");
+            return;
+        }
+
+        dispatch(setMembers([
+            ...members,
+            {
+                id: ++ passengerIdSeed,
+                name: '',
+                gender: 'none',
+                ticketType: 'child',
+                birthday: '',
+                followAdult: 0,
+                seat: 'Z',
+            }
+        ]));
+    }
+}
+
+export function removePassenger(id){
+    return (dispatch, getState) => {
+        const { members } = getState();
+        let newMembers = members.filter(member => {
+            return member.id !== id && member.followAdult !== id;
+        });
+        dispatch(setMembers(newMembers));
+    }
+}
+
+export function updateMember(id, data){
+    return (dispatch, getState) => {
+        const { members } = getState();
+        for(let i = 0;i < members.length;i ++){
+            if(members[i].id === id){
+                const newMembers = [...members];
+                newMembers[i] = Object.assign({}, members[i], data);
+                dispatch(setMembers(newMembers));
+                break;
+            }
+        }
     }
 }

@@ -5,12 +5,12 @@ import "../CSS/Dialog.scss";
 
 const TimetableDialog = (props) => {
 
-    const { showDialog, setIsShowTimetable } = props;
+    const { isShowTimetable, setIsShowTimetable } = props;
     const dialog = useRef(null);
 
     useEffect(() => {
         function handleClick(e){
-            if(!dialog.current.contains(e.target) && showDialog){
+            if(!dialog.current.contains(e.target) && isShowTimetable){
                 setIsShowTimetable(false);
             }
         }
@@ -19,7 +19,7 @@ const TimetableDialog = (props) => {
         return () => {
             document.removeEventListener('click', handleClick, false);
         }
-    },[dialog, showDialog, setIsShowTimetable]);
+    },[dialog, isShowTimetable, setIsShowTimetable]);
 
     return (
         <div className="dialog-mask-wrapper">
@@ -61,7 +61,7 @@ const TimetableDialog = (props) => {
 }
 
 TimetableDialog.propTypes = {
-    showDialog: PropTypes.bool.isRequired,
+    isShowTimetable: PropTypes.bool.isRequired,
     setIsShowTimetable: PropTypes.func.isRequired,
 };
 
