@@ -159,10 +159,13 @@ export function createAdult(){
             ...members,
             {
                 id: ++ passengerIdSeed,
-                name: '',
-                ticketType: 'adult',
-                licenceNo: '',
-                seat: 'Z',
+                name: '',       // 性名
+                ticketType: 'adult',        // 票的类型
+                phoneNumber: '',            // 手机号
+                licenceNo: '',              // 证件号
+                seat: 'Z',                  // 座位
+                licenceType: '身份证',            // 证件类型
+                ticketName: '成人票',           // 票名称
             }
         ]));
     }
@@ -187,18 +190,34 @@ export function createChild(){
             return;
         }
 
+        const firstAdult = members.find(item => item.ticketType === "adult");
+
         dispatch(setMembers([
             ...members,
             {
                 id: ++ passengerIdSeed,
-                name: '',
-                gender: 'none',
-                ticketType: 'child',
-                birthday: '',
-                followAdult: 0,
-                seat: 'Z',
+                name: '',       // 性名 
+                gender: '',     // 性别
+                ticketType: 'child',        // 票类型
+                birthday: '',           // 出生日期
+                followAdult: firstAdult ? firstAdult.id : '', // 跟随的成年人，值是成年人的 id，默认是第一个成年人的 id
+                seat: 'Z',              // 座位信息
+                ticketName: '儿童票'
             }
         ]));
+    }
+}
+
+export function handleShowFrame(list, id, type, activeVal){
+    return (dispatch, getState) => {
+        const { isShowCertificateFrame } = getState();
+        if(!isShowCertificateFrame){
+            dispatch(setNowList({
+                data: list,
+                id, type, active: activeVal
+            }));
+        }
+        dispatch(setIsShowCertificateFrame(true));
     }
 }
 
@@ -206,9 +225,15 @@ export function removePassenger(id){
     return (dispatch, getState) => {
         const { members } = getState();
         let newMembers = members.filter(member => {
+            // 传入的 id 就是要被删除掉的表单，如果删除了成年人，与他关联的儿童也会被删除
             return member.id !== id && member.followAdult !== id;
         });
-        dispatch(setMembers(newMembers));
+        // 还要做二次筛选，因为如果删除一个成人后，可能就没有成人了，这时就要把 members 变成一个空数组
+        let adults = newMembers.filter(item => item.ticketType === "adult");
+        if(!adults.length){
+            // 表明没有成人
+            dispatch(setMembers([]));
+        }else  dispatch(setMembers(newMembers));
     }
 }
 
@@ -222,6 +247,31 @@ export function updateMember(id, data){
                 dispatch(setMembers(newMembers));
                 break;
             }
+        }
+    }
+}
+
+export function updateTicketName(id, ticketName){
+    return (dispatch, getState) => {
+        const { members } = getState();
+        // 首先获取到 id 对应的 ticketName
+        const self = members.find(item => item.id === id);
+        if(self && self.ticketName === ticketName)   return;     // 说明点的是同一个，这时就不用处理
+
+        if(ticketName !== '儿童票'){
+            dispatch(updateMember(id, { ticketName }));
+        }else{
+            // 选择的是儿童票就要分情况
+            // 1. 选择成了儿童票之后页面中没有成人了，这时就要警告，不能这样操作
+            // 2. 选择成儿童票时候还有别的成人，这是可以的
+            // 过滤出成人，并且与传入的 id 不同（不然会获取到自身）
+            const adults = members.filter(item => item.ticketType === "adult" && item.id !== id);
+            if(!adults.length){     // 没有找到
+                alert("请至少正确添加一个成人信息");
+                return;
+            }
+            // 不然就更新，还要更新 ticketType 为 child 类型
+            dispatch(updateMember(id, { ticketName, ticketType: 'child' }));
         }
     }
 }

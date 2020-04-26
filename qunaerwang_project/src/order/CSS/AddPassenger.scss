@@ -38,8 +38,7 @@ $borderStyle: 1px solid #dcdfe0;
             border-bottom: $borderStyle;
             .title{
                 height: 2rem;
-                line-height: 2rem;
-                min-width: 3.75rem;
+                width: 3.75rem;
                 font-size: .9rem;
                 color: $themeColor;
                 border-right: $borderStyle;
@@ -83,6 +82,16 @@ $borderStyle: 1px solid #dcdfe0;
                     i.iconfont{
                         font-size: .8rem;
                     }
+                }
+            }
+            &.right-arrow{
+                input:disabled{
+                    background-color: transparent;
+                }
+                .rotate{
+                    display: inline-block;
+                    transform: rotate(180deg);
+                    .iconfont{ font-size: .8rem; }
                 }
             }
         }

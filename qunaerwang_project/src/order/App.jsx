@@ -11,10 +11,16 @@ import Safeguard from "./components/Safeguard";
 import AddPassenger from "./components/AddPassenger";
 import Agreement from "./components/Agreement";
 import SubmitOrder from "./components/SubmitOrder";
-import TicketType from "./components/TicketType";
+import Menu from "./components/Menu";
 
 import { URLQuery } from "../common/tools/URLQuery";
 import { getTodayFirstTime, getWeek } from "../common/tools/timeTools";
+
+import {
+    GENDER_LIST,
+    LICENCE_LIST,
+    TICKET_TYPE_LIST,
+} from "./store/config";
 
 import {
     setDepStation,
@@ -22,23 +28,22 @@ import {
     setSeatType,
     setDepDate,
     setTrainNumber,
-    setIsShowAddPerson,
     toggleIsShowAmountDetailsFrame,
     setIsShowAmountDetailsFrame,
     setIsShowCertificateFrame,
-    toggleIsShowCertificateFrame,
     createAdult,
     createChild,
-    setNowList,
     removePassenger,
     updateMember,
+    updateTicketName,
+    handleShowFrame,
 } from "./store/actions";
 
 function App(props){
 
-    const [cerTypeList, setCerTypeList] = useState([]);
-    const [genderList, setGenderList] = useState([]);
-    const [ticketTypeList, setTicketTypeList] = useState([]);
+    const [cerTypeList] = useState(() => LICENCE_LIST);
+    const [genderList] = useState(() => GENDER_LIST);
+    const [ticketTypeList] = useState(() => TICKET_TYPE_LIST);
 
     const {
         dispatch,
@@ -47,7 +52,6 @@ function App(props){
         depDate,
         seatType,
         trainNumber,
-        isShowAddPerson,
         isShowAmountDetailsFrame,
         isShowCertificateFrame,
         nowList,
@@ -68,25 +72,12 @@ function App(props){
         dispatch(setTrainNumber(trainNum));
     },[dispatch]);
 
-    useEffect(() => {
-        fetch("/api/orderList")
-            .then(json => json.json())
-            .then(data => {
-                const { cerType, gender, ticketType } = data;
-                setGenderList(gender);
-                setCerTypeList(cerType);
-                setTicketTypeList(ticketType);
-            }).catch(err => console.error(err));
-    },[]);
-
-    const pasFormCbs = useMemo(() => bindActionCreators({ 
-        setIsShowAddPerson,
-        setNowList,
-        setIsShowCertificateFrame,
+    const pasFormCbs = useMemo(() => bindActionCreators({
         createAdult,
         createChild,
         removePassenger,
         updateMember,
+        handleShowFrame,
     }, dispatch),[dispatch]);
     
     const submitOrderCbs = useMemo(() => bindActionCreators({
@@ -95,6 +86,8 @@ function App(props){
     }, dispatch),[dispatch]);
     const dialogCbs = useMemo(() => bindActionCreators({ 
         setIsShowCertificateFrame,
+        updateMember,
+        updateTicketName,
     },dispatch),[dispatch]);
 
 
@@ -115,12 +108,10 @@ function App(props){
                 </div>
 
                 <Recommend seatType={seatType} />
-                <AddPassenger 
-                    isShowAddPerson={isShowAddPerson}
+                <AddPassenger
                     cerTypeList={cerTypeList}
                     genderList={genderList}
                     ticketTypeList={ticketTypeList}
-                    isShowCertificateFrame={isShowCertificateFrame}
                     members={members}
                     {...pasFormCbs}
                 />
@@ -136,7 +127,10 @@ function App(props){
                     {...submitOrderCbs}
                 />
                 {
-                    <TicketType isShowCertificateFrame={isShowCertificateFrame} list={nowList} {...dialogCbs} />
+                    <Menu 
+                        isShowCertificateFrame={isShowCertificateFrame} 
+                        info={nowList} {...dialogCbs}
+                    />
                 }
             </div>
         </div>

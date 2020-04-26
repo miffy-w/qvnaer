@@ -1,7 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from "prop-types";
 import "../CSS/AddPassenger.scss";
 
+import {
+    GENDER,
+    LICENCE_TYPE,
+    TICKET_NAME,
+    FOLLOW_ADULT,
+} from "../store/config";
 
 function Passenger(props){
 
@@ -12,9 +18,18 @@ function Passenger(props){
         ticketType,
         gender,
         birthday,
+        phoneNumber,
         licenceNo,
+        licenceType,
+        ticketName,
         removePassenger,
         updateMember,
+        handleShowFrame,
+        genderList,
+        cerTypeList,
+        ticketTypeList,
+        getAdultNameList,
+        getAdultName,
     } = props;
 
     const isAdult = ticketType === "adult";
@@ -32,45 +47,84 @@ function Passenger(props){
                         value={name}
                         onChange={(e) => updateMember(id, { name: e.target.value })}
                     />
-                    <span className="ticketBtn">
-                        成人票
-                        <span className="rotate">
-                            <i className="rotate iconfont">&#xeb99;</i>
-                        </span>
-                    </span>
+                    {
+                        isAdult && (
+                            <span className="ticketBtn" 
+                                onClick={() => handleShowFrame(ticketTypeList, id, TICKET_NAME, ticketName)}
+                            >
+                                { ticketName }
+                                <span className="rotate">
+                                    <i className="rotate iconfont">&#xeb99;</i>
+                                </span>
+                            </span>
+                        )
+                    }
                 </div>
                 {
                     isAdult && (
-                        <div className="certificate wrapper">
-                            <div className="title">身份证
-                                <span className="rotate">
-                                    <i className="iconfont rotate">&#xeb99;</i>
-                                </span>
+                        <>
+                            <div className="certificate wrapper">
+                                <div className="title" 
+                                    onClick={(e) => handleShowFrame(cerTypeList, id, LICENCE_TYPE, licenceType) }>
+                                        { licenceType }
+                                    <span className="rotate">
+                                        <i className="iconfont rotate">&#xeb99;</i>
+                                    </span>
+                                </div>
+                                <input placeholder="证件号码" type="text" name="certificate"
+                                    value={licenceNo}
+                                    onChange={(e) => updateMember(id, { licenceNo: e.target.value })}
+                                />
                             </div>
-                            <input placeholder="证件号码" type="text" name="certificate"
-                                value={licenceNo}
-                                onChange={(e) => updateMember(id, { licenceNo: e.target.value })}
-                            />
-                        </div>
+
+                            <div className="phone wrapper">
+                                <div className="title">手机号</div>
+                                <input placeholder="建议填写乘客本人手机号 否则影响出行" type="text" name="phone"
+                                    value={phoneNumber}
+                                    onChange={(e) => updateMember(id, { phoneNumber: e.target.value })}
+                                />
+                            </div>
+                        </>
                     )
                 }
                 {
                     !isAdult && (
-                        <div className="certificate wrapper">
-                            <div className="title">性别
-                                <span className="rotate">
-                                    <i className="iconfont rotate">&#xeb99;</i>
+                        <>
+                            <div className="gender right-arrow wrapper">
+                                <div className="title">性别</div>
+                                <input placeholder="性别" type="text" name="certificate"
+                                    value={gender}
+                                    readOnly onClick={(e) => handleShowFrame(genderList, id, GENDER, e.target.value)}
+                                />
+                                <span className="rotate" onClick={() => handleShowFrame(genderList, id, GENDER)}>
+                                    <i className="iconfont">&#xeb99;</i>
                                 </span>
                             </div>
-                            <input placeholder="性别" type="text" name="certificate"/>
-                        </div>
+
+                            <div className="followAdult right-arrow wrapper">
+                                <div className="title">同行人</div>
+                                <input placeholder="" type="text" name="certificate"
+                                    readOnly
+                                    value={getAdultName(followAdult)}       // 通过 id 拿到成年人的名字
+                                    // 最后一个参数应传入 followAdult，表示当前儿童对应的成年人的 id
+                                    onClick={(e) => handleShowFrame(getAdultNameList, id, FOLLOW_ADULT, followAdult)}
+                                />
+                                <span className="rotate">
+                                    <i className="iconfont">&#xeb99;</i>
+                                </span>
+                            </div>
+
+                            <div className="birthday wrapper">
+                                <div className="title">出生日期</div>
+                                <input placeholder="如：20051015" type="text" name="phone"
+                                    value={birthday}
+                                    onChange={(e) => updateMember(id, { birthday: e.target.value })}
+                                />
+                            </div>
+                        </>
                     )
                 }
-
-                <div className="phone wrapper">
-                    <div className="title">手机号</div>
-                    <input placeholder="建议填写乘客本人手机号 否则影响出行" type="text" name="phone"/>
-                </div>
+                
             </div>
         </form>
     );
@@ -81,36 +135,44 @@ Passenger.propTypes = {
     name: PropTypes.string.isRequired,
     ticketType: PropTypes.string.isRequired,
     gender: PropTypes.string,
-    followAdult: PropTypes.number,
+    followAdult: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     birthday: PropTypes.string,
     licenceNo: PropTypes.string,
     removePassenger: PropTypes.func.isRequired,
     updateMember: PropTypes.func.isRequired,
+    genderList: PropTypes.array.isRequired,
+    cerTypeList: PropTypes.array.isRequired,
+    ticketTypeList: PropTypes.array.isRequired,
+    handleShowFrame: PropTypes.func.isRequired,
+    getAdultNameList: PropTypes.array.isRequired,
+    getAdultName: PropTypes.func.isRequired,
 };
 
 const AddPassenger = (props) => {
-    const { 
-        isShowAddPerson, 
-        setIsShowAddPerson,
-        isShowCertificateFrame,
-        setNowList,
+    const {
         genderList,
         cerTypeList,
         ticketTypeList,
-        setIsShowCertificateFrame,
         members,
         createAdult,
         createChild,
         removePassenger,
         updateMember,
+        handleShowFrame,
     } = props;
 
-    function handleShowFrame(list){
-        if(!isShowCertificateFrame){
-            setNowList(list);
+    const getAdultNameList = useMemo(() => {
+        return members.filter(item => item.ticketType === "adult")
+            .map(item => ({ name: item.name, adultId: item.id }));
+    },[members]);
+
+    const getAdultName = useCallback((id) => {
+        let member = members.find(item => item.ticketType === "adult" && item.id === id);
+        if(member){
+            return member.name;
         }
-        setIsShowCertificateFrame(true);
-    }
+        return "";
+    },[members]);
 
     return (
         <div className="add-passenger-wrapper">
@@ -120,6 +182,12 @@ const AddPassenger = (props) => {
                         key={member.id} 
                         removePassenger={removePassenger}
                         updateMember={updateMember}
+                        genderList={genderList}
+                        cerTypeList={cerTypeList}
+                        ticketTypeList={ticketTypeList}
+                        handleShowFrame={handleShowFrame}
+                        getAdultNameList={getAdultNameList}
+                        getAdultName={getAdultName}
                         { ...member } 
                     />
                 })
@@ -138,11 +206,11 @@ const AddPassenger = (props) => {
 }
 
 AddPassenger.propTypes = {
-    isShowAddPerson: PropTypes.bool.isRequired,
-    setIsShowAddPerson: PropTypes.func.isRequired,
     cerTypeList: PropTypes.array.isRequired,
     genderList: PropTypes.array.isRequired,
     ticketTypeList: PropTypes.array.isRequired,
+    createAdult: PropTypes.func.isRequired,
+    createChild: PropTypes.func.isRequired,
     members: PropTypes.array.isRequired,
     removePassenger: PropTypes.func.isRequired,
     updateMember: PropTypes.func.isRequired,
