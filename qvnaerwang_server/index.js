@@ -1,8 +1,12 @@
 const express = require('express');
 const fs = require('fs');
-const { getTrainNumber, getCityList, getTrainSeat, getOrderList } = require('./crawler');
+const { getTrainNumber, getCityList, getTrainSeat } = require('./crawler');
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("../qunaerwang_project/build"));
 
 app.get('/',(req,res) => {
     res.status(200);
@@ -41,9 +45,17 @@ app.get('/',(req,res) => {
     const query = req.query;
     const result = await getTrainSeat(query);
     res.send(result);
-}).get('/api/orderList', async (req, res) => {
-    const result = await getOrderList();
-    res.send(result);
-})
+}).post('/api/orderData', async (req, res) => {
+    if(!req.body || !Object.keys(req.body).length){
+        res.status(200).send({
+            code: 0,
+            msg: 'ERROR'
+        });
+    }
+    res.status(200).send({
+        code: 1,
+        msg: 'OK'
+    });
+});
 
 app.listen(5000,() => console.log("server is runing!: http://localhost:5000"));

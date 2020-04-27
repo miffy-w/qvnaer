@@ -9,12 +9,14 @@ import {
     ACTION_SET_DURATION,
     ACTION_SET_TICKET_TYPE,
     ACTION_SET_MEMBERS,
-    ACTION_SET_IS_SHOW_ADD_PERSON,
     ACTION_SET_IS_SHOW_MEAL_FRAME,
     ACTION_SET_IS_SHOW_CERTIFICATE_FRAME,
     ACTION_SET_IS_SHOW_AMOUNT_DETAILS_FRAME,
     ACTION_SET_SEAT_TYPE,
     ACTION_SET_NOW_LIST,
+    ACTION_SET_IS_SHOW_TIP,
+    ACTION_SET_TIP_TITLE,
+    ACTION_SET_RESERVED_PHONE,
 } from "./actions";
 
 export default {
@@ -98,14 +100,6 @@ export default {
             default: return state;
         }
     },
-    isShowAddPerson(state = null, action){
-        const { type, payload } = action;
-        switch(type){
-            case ACTION_SET_IS_SHOW_ADD_PERSON:
-                return payload;
-            default: return state;
-        }
-    },
     isShowMealFrame(state = null, action){
         const { type, payload } = action;
         switch(type){
@@ -145,5 +139,30 @@ export default {
                 return payload;
             default: return state;
         }
-    }
+    },
+
+    isShowTip(state = false, action){
+        const { type, payload } = action;
+        switch(type){
+            case ACTION_SET_IS_SHOW_TIP:
+                return payload;
+            default: return state;
+        }
+    },
+    tipTitle(state = '', action){
+        const { type, payload } = action;
+        switch(type){
+            case ACTION_SET_TIP_TITLE:
+                return payload;
+            default: return state;
+        }
+    },
+    reservedPhone(state = '', action){
+        const { type, payload } = action;
+        switch(type){
+            case ACTION_SET_RESERVED_PHONE:
+                return payload;
+            default: return state;
+        }
+    },
 };

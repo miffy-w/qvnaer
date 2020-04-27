@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 
 import "../CSS/TrainCard.scss";
 import Proptypes from "prop-types";
 
-export default function TrainCard(props){
+const TrainCard = memo((props) => {
     const { depWeek, arrWeek, depStation, arrStation } = props;
 
     return (
@@ -23,7 +23,7 @@ export default function TrainCard(props){
             </div>
         </div>
     );
-}
+});
 
 TrainCard.propTypes = {
     depWeek: Proptypes.string.isRequired,
@@ -31,3 +31,5 @@ TrainCard.propTypes = {
     depStation: Proptypes.string.isRequired,
     arrStation: Proptypes.string.isRequired,
 };
+
+export default TrainCard;

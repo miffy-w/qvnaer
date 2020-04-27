@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 import './App.css';
 
+import Tip from "../common/Tip";
 import Header from "../common/Header";
 import CardMiddle from "./components/CardMiddle";
 import TrainCard from "../ticket/components/TrainCard";
@@ -10,7 +11,9 @@ import Recommend from "./components/Recommend";
 import Safeguard from "./components/Safeguard";
 import AddPassenger from "./components/AddPassenger";
 import Agreement from "./components/Agreement";
+import ChooseSeat from "./components/ChooseSeat";
 import SubmitOrder from "./components/SubmitOrder";
+import ContactPhone from "./components/ContactPhone";
 import Menu from "./components/Menu";
 
 import { URLQuery } from "../common/tools/URLQuery";
@@ -37,6 +40,10 @@ import {
     updateMember,
     updateTicketName,
     handleShowFrame,
+    setIsShowTip,
+    setTipTitle,
+    setReservedPhone,
+    verifyForm,
 } from "./store/actions";
 
 function App(props){
@@ -56,11 +63,18 @@ function App(props){
         isShowCertificateFrame,
         nowList,
         members,
+        isShowTip,
+        tipTitle,
+        reservedPhone,
     } = props;
 
     const goback = useCallback(() => {
         window.history.back();
     },[]);
+
+    const isShowTipCb = useCallback(() => {
+        dispatch(setIsShowTip(!isShowTip))
+    },[isShowTip, dispatch]);
 
     useEffect(() => {
         let obj = URLQuery(window.location.href);
@@ -83,12 +97,21 @@ function App(props){
     const submitOrderCbs = useMemo(() => bindActionCreators({
         toggleIsShowAmountDetailsFrame,
         setIsShowAmountDetailsFrame,
+        setIsShowTip,
+        setTipTitle,
+        verifyForm,
     }, dispatch),[dispatch]);
     const dialogCbs = useMemo(() => bindActionCreators({ 
         setIsShowCertificateFrame,
         updateMember,
         updateTicketName,
     },dispatch),[dispatch]);
+    const chooseSeatCbs = useMemo(() => bindActionCreators({
+        updateMember,
+    },dispatch),[dispatch]);
+    const contactPhoneCbs = useMemo(() => bindActionCreators({
+        setReservedPhone,
+    }, dispatch),[dispatch]);
 
 
     return (
@@ -116,10 +139,10 @@ function App(props){
                     {...pasFormCbs}
                 />
 
-                <form className="touchPhone">
-                    <span className="tip">联系手机</span>
-                    <input type="text" name="touchPhone" placeholder="通知出票是信息" />
-                </form>
+                <ContactPhone reservedPhone={reservedPhone} { ...contactPhoneCbs} />
+                {
+                    members.length ? <ChooseSeat members={members} { ...chooseSeatCbs } /> : null
+                }
                 <Safeguard />
                 <Agreement />
                 <SubmitOrder 
@@ -133,8 +156,15 @@ function App(props){
                     />
                 }
             </div>
+            {
+                isShowTip ? <Tip title={tipTitle}
+                    timeout={1500}
+                    // 当定时器完成后，调用的回调函数
+                    cb={() => isShowTipCb()}
+                /> : null
+            }
+            
         </div>
-        
     );
 }
 

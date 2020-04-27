@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import * as serviceWorker from "../serviceWorker";
 
 import 'normalize.css/normalize.css';
 import store from './store/store';
@@ -13,3 +14,9 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+if(process.env.NODE_ENV === 'production'){
+    serviceWorker.register();
+}else{
+    serviceWorker.unregister();
+}

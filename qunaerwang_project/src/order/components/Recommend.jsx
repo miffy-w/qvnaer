@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from "prop-types";
 import "../CSS/Recommend.scss";
 
-const Recommend = (props) => {
+const Recommend = memo((props) => {
     const { seatType } = props;
     return (
         <>
@@ -24,7 +24,7 @@ const Recommend = (props) => {
             </div>
         </>
     );
-}
+})
 
 Recommend.propTypes = {
     seatType: PropTypes.string.isRequired,

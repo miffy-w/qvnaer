@@ -116,7 +116,7 @@ function Passenger(props){
 
                             <div className="birthday wrapper">
                                 <div className="title">出生日期</div>
-                                <input placeholder="如：20051015" type="text" name="phone"
+                                <input placeholder="如：2005-10-15" type="text" name="phone"
                                     value={birthday}
                                     onChange={(e) => updateMember(id, { birthday: e.target.value })}
                                 />

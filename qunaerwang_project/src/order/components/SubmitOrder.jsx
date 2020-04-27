@@ -1,9 +1,9 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, memo } from 'react';
 import PropTypes from "prop-types";
 import '../CSS/SubmitOrder.scss';
 
 // 金额详情页
-function AmountDetails(props){
+const AmountDetails = memo((props) => {
     const {setIsShowAmountDetailsFrame} = props;
     const bill = useRef(null);
 
@@ -33,7 +33,7 @@ function AmountDetails(props){
             </div>
         </div>
     );
-}
+});
 
 AmountDetails.propTypes = {
     setIsShowAmountDetailsFrame: PropTypes.func.isRequired,
@@ -44,7 +44,9 @@ export default function SubmitOrder(props) {
         isShowAmountDetailsFrame, 
         toggleIsShowAmountDetailsFrame,
         setIsShowAmountDetailsFrame,
+        verifyForm,
     } = props;
+
     return (
         <>
             {
@@ -67,7 +69,7 @@ export default function SubmitOrder(props) {
                 </div>
 
                 <div className="submit-btn">
-                    <button className="btn">
+                    <button onClick={verifyForm} className="btn">
                         提交订单
                     </button>
                 </div>

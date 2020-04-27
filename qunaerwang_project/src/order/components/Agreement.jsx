@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import '../CSS/Agreement.scss';
 
-export default function Agreement() {
+const Agreement = memo(() => {
     return (
         <>
             <div className="reminding-wrapper">
@@ -34,4 +34,6 @@ export default function Agreement() {
             </div>
         </>
     )
-}
+});
+
+export default Agreement;

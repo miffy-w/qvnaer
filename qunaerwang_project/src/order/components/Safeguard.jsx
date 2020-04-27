@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import '../CSS/Safeguard.scss';
 
-export default function Safeguard() {
+const Safeguard = memo(() => {
     return (
         <div className="safeguard-wrapper">
             <div className="wrapper">
@@ -13,4 +13,6 @@ export default function Safeguard() {
             </div>
         </div>
     )
-}
+});
+
+export default Safeguard;

@@ -76,20 +76,8 @@ async function getTrainSeat(query){
     }
 }
 
-async function getOrderList(){
-    return new Promise((resolve, reject) => {
-        fs.readFile("./rest/order/data.json", {encoding: 'utf8'}, (err, data) => {
-            if(err){
-                reject(err);
-            }
-            resolve(data);
-        });
-    });
-}
-
 module.exports = {
     getTrainNumber,
     getCityList,
     getTrainSeat,
-    getOrderList,
 }
