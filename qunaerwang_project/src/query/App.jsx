@@ -44,15 +44,6 @@ import { URLQuery } from '../common/tools/URLQuery';
 import useNav from '../common/tools/useNav';
 import { bindActionCreators } from 'redux';
 
-// 处理 jsonp 发过来的车次信息并处理
-window.jsonp4 = function(data){
-    if(data){
-        return data;
-    }else{
-        console.log(-1);
-    }
-}
-
 function App(props){
 
     const {
@@ -81,15 +72,20 @@ function App(props){
         arriveTimeEnd,
     } = props;
     useEffect(() => {
-        const queryObj = URLQuery(window.location.href);
-        const { fromCity, toCity, date, searchType } = queryObj;
-        dispatch(setFrom(fromCity));
-        dispatch(setTo(toCity));
-        dispatch(setDepartDate(getTodayFirstTime(date)));
-        if(searchType && searchType === "true"){     // searchType 有值时开启了只看高铁选项
-            dispatch((setHighSpeed(true)));
-        } 
-        dispatch(setSearchParsed(true));        // url 已经解析完
+        try {
+            const queryObj = URLQuery(window.location.href);
+            const { fromCity, toCity, date, searchType } = queryObj;
+            dispatch(setFrom(fromCity));
+            dispatch(setTo(toCity));
+            dispatch(setDepartDate(getTodayFirstTime(date)));
+            if(searchType && searchType === "true"){     // searchType 有值时开启了只看高铁选项
+                dispatch((setHighSpeed(true)));
+            } 
+            dispatch(setSearchParsed(true));        // url 已经解析完
+        } catch (error) {
+            console.log(error.message);
+        }
+        
     },[dispatch]);
 
     useEffect(() => {

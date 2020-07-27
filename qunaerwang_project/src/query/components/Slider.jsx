@@ -90,7 +90,7 @@ function Slider(props){
         const distance = touch.pageX - lastStartX.current;
         lastStartX.current = touch.pageX;
         // 相差两个小时，往右滑，distance 因此大于 0
-        if(distance > 0 && startHours - endHours >= -2){
+        if(distance > 0 && startHours - endHours >= -MIN_TIME_INTERVAL){
             if(start >= 100 - MIN_TIME_INTERVAL / 24 * 100) {
                 // 这样，滑动速度再快，也总是相隔两个小时
                 setStart(100 - MIN_TIME_INTERVAL / 24 * 100);
@@ -109,7 +109,7 @@ function Slider(props){
         const distance = touch.pageX - lastEndX.current;
         lastEndX.current = touch.pageX;
         // 相差两个小时，向左滑，因此 distance 小于 0
-        if(distance < 0 && startHours - endHours >= -2){
+        if(distance < 0 && startHours - endHours >= -MIN_TIME_INTERVAL){
             if(end <= 100 - (24 - MIN_TIME_INTERVAL) / 24 * 100) {
                 // 这样，滑动速度再快，也总是相隔两个小时
                 setEnd(100 - (24 - MIN_TIME_INTERVAL) / 24 * 100);

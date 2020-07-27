@@ -9,8 +9,8 @@ export default createStore(
     // 默认 state
     {
         isFilter: false,                // 综合筛选按钮的样式如何展示
-        from: null, // 出发城市
-        to: null,   // 到达城市
+        from: "", // 出发城市
+        to: "",   // 到达城市
         departDate: getTodayFirstTime(Date.now()),  // 出发日期
         highSpeed: false,       // 是否选择了高铁动车
         trainList: [],      // 车次列表

@@ -58,4 +58,10 @@ app.get('/',(req,res) => {
     });
 });
 
+app.use(function(err, req,res){
+    res.send({
+        msg: err
+    });
+});
+
 app.listen(5000,() => console.log("server is runing!: http://localhost:5000"));

@@ -1,0 +1,61 @@
+#order-wrapper .transparent-mask{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    width: 100vw;
+    background-color: transparent;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0;
+    
+    &.transition{
+        height: 100vh;
+        .ticketType-dialog{
+            display: flex;
+        }
+        .mask{
+            display: block;
+        }
+    }
+
+    .mask{
+        height: 100%;
+        display: none;
+        opacity: 0;
+    }
+
+    .ticketType-dialog{
+        position: fixed;
+        background-color: white;
+        width: 100vw;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        display: none;
+        flex-direction: column;
+
+        .active{
+            color: #1ba9ba;
+        }
+    
+        &>div{
+            padding: 1rem 0;
+            text-align: center;
+            border-bottom: 1px solid #dddddd;
+            &:nth-last-of-type(1){
+                border: none;
+            }
+            &.close-btn{
+                background-color: #00c9e2;
+                padding: .4rem;
+                border-radius: 10px 10px 0 0;
+                text-align: left;
+                color: white;
+                i.iconfont{
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+}

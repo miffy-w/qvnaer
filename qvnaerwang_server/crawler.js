@@ -50,7 +50,7 @@ async function getTrainNumber(info){
         var result = await proRequest(fetchUri);
         return result;
     } catch (error) {
-        return -1;
+        throw Error(error);
     }
 }
 
@@ -61,7 +61,7 @@ async function getCityList(info){
         var result = await proRequest(str);
         return result;
     } catch (error) {
-        return -1;
+        throw Error(error);
     }
 }
 
@@ -72,7 +72,7 @@ async function getTrainSeat(query){
         var result = await proRequest(url);
         return result;
     } catch (error) {
-        return -1;
+        throw Error(error);
     }
 }
 
