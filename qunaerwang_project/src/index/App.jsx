@@ -167,16 +167,18 @@ function App(props){
             <div className={isShowCityListPage ? "city-selector" : "cityListhidden" }>
                 <CityListPage />
             </div>
-            {
-                isShowCalendar ? <div className="train-calendar-wrapper">
-                    <FromDateCtx.Provider value={getThisDate}>
-                        <Calendar
-                            listenScroll={listenScroll}
-                            isGotoTop={isGotoTop}
-                        />
-                    </FromDateCtx.Provider>
-                </div> : ''
-            }
+
+            <div
+                className="train-calendar-wrapper"
+                style={{display: isShowCalendar ? 'block' : 'none'}}
+            >
+                <FromDateCtx.Provider value={{ getThisDate, fromDate }}>
+                    <Calendar
+                        listenScroll={listenScroll}
+                        isGotoTop={isGotoTop}
+                    />
+                </FromDateCtx.Provider>
+            </div>
             
         </div>
     );

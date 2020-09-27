@@ -28,47 +28,53 @@ WeekBar.propTypes = {
 // 渲染每一周
 function EveryWeek(props){
     const { year, month, weekList } = props;
-    const getThisDate = useContext(FromDateCtx);
+    const {getThisDate, fromDate} = useContext(FromDateCtx);
 
     // nowDate-td: 表示刚好是这一天
     // pastDate-td：表示已经过去的日期
     // laterDate-td：表示还没有过去的日期
     // weekedDate-td：表示没有过去的日期是周日
 
-    function getClassName(year,month,item){
+    function getClassName(year,month,day){
         var date = new Date();
-        if(!item) return 'laterDate-td';
+        var resultStr = 'laterDate-td';
+        if(!day) return resultStr;
         if(date.getMonth() + 1 === month){      // 是同一个月
-            if(date.getDate() < item){      // 现在的日期号小于传入的日期号
-                var d = new Date(new Date().setDate(item)).getDay();
+            if(date.getDate() < day){      // 现在的日期号小于传入的日期号
+                var d = new Date(new Date().setDate(day)).getDay();
                 if(d === 0 || d === 6){
-                    return 'weekedDate-td';     // 检验是不是周日/周六
-                }else{
-                    return 'laterDate-td';
+                    resultStr = 'weekedDate-td';     // 检验是不是周日/周六
                 }
-            }else if(date.getDate() === item){      // 刚好是同月同日
-                return 'nowDate-td';
+            }else if(date.getDate() === day){      // 刚好是同月同日
+                resultStr = 'nowDate-td';
             }else{
-                return 'pastDate-td';
+                resultStr = 'pastDate-td';
             }
         }else{      // 现在的月份大于传入的月份，这里只有跨年的情况，或者本来就小于传入的月份
             var D = new Date();
             D.setFullYear(year);
             D.setMonth(month - 1);
-            D.setDate(item);
+            D.setDate(day);
             if(D.getDay() === 0 || D.getDay() === 6){
-                return 'weekedDate-td';
-            }else{
-                return 'laterDate-td';
+                resultStr = 'weekedDate-td';
             }
         }
+        // 是不是选中状态
+        if(
+            fromDate.year === year &&
+            fromDate.month === month &&
+            fromDate.date === day
+        ) {
+            resultStr += ' selected-td';
+        }
+        return resultStr;
     }
     return (
         <tr className="week-tr">
             {
                 weekList.map((item,index) => {
                     return <td
-                        onClick={() => getThisDate({year,month,date:item}) }
+                        onClick={(e) => getThisDate({year,month,date:item}, e) }
                         className={ getClassName(year,month,item) } 
                         key={index}
                     >{item}</td>;

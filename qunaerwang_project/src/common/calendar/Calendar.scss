@@ -53,14 +53,15 @@
             tr > td{
                 padding: 1rem;
                 &.nowDate-td{
-                    background-color: #00afc7;
+                    border: 1px solid #00afc7;
+                    // background-color: #00afc7;
                     border-radius: 4px;
-                    color: white;
+                    color: #424242;
                     padding: 0.5rem;
                     &::after{
                         content: "今天";
                         display: block;
-                        color: white;
+                        color: inherit;
                         margin-top: 0.2rem;
                         font-size: 1rem;
                     }
@@ -70,6 +71,12 @@
                 }
                 &.pastDate-td{
                     color: #ccc;
+                }
+                &.selected-td{
+                    background-color: #00afc7;
+                    box-sizing: border-box;
+                    color: white;
+                    border-radius: 4px;
                 }
             }
         }
