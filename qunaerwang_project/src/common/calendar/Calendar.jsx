@@ -190,7 +190,7 @@ function Calendar(props) {
         let monthObj = {
             monthNum: nowMonthNum,     // 月份天数
             firstWeek,       // 找到这个月的第一天（一号）星期几
-            lastWeek,
+            lastWeek,       // 这个月的最后一天是星期几
             month,         // 这个月的月份
             year
         };
@@ -206,6 +206,10 @@ function Calendar(props) {
         setWeekArr(["日","一","二","三","四","五","六"]);
         // 找到 星期导航的高度
         window.addEventListener('scroll',listenScroll);
+
+        return () => {
+            window.removeEventListener('scroll', listenScroll);
+        };
     }, [listenScroll]);
 
     // 这里是为了生成所有日期的数据
@@ -219,6 +223,8 @@ function Calendar(props) {
         date.setSeconds(0);
         date.setMilliseconds(0);
         date.setDate(1);
+        // nowDate.monthObj.month 是正确的日期对应关系，即：1 就是 1 月份
+        // 而 JavaScript 中的 month 0 才表示 1 月份
         date.setMonth(nowDate.monthObj.month);
 
         // 之后的一个月份
